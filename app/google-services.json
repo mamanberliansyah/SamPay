@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "328802496589",
+    "firebase_url": "https://sampay-e1be2.firebaseio.com",
+    "project_id": "sampay-e1be2",
+    "storage_bucket": "sampay-e1be2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328802496589:android:c290ea3c4cefd279",
+        "android_client_info": {
+          "package_name": "bengkelradio.sampay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328802496589-k01jfhqn5445jvtrohvm1pud6i7s9aa8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "bengkelradio.sampay",
+            "certificate_hash": "76457c80d75e6fa58d729022e312a37fc019e4e0"
+          }
+        },
+        {
+          "client_id": "328802496589-8jsumqu193mmg33d8gbc4ajbih6ue3fj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR0yiYBt4L1RkWuKxJsYrmBhNgat_Mg2o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328802496589-8jsumqu193mmg33d8gbc4ajbih6ue3fj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
