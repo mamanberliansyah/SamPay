@@ -8,22 +8,22 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ValueEventListener;
 
+//call and write data on Firebase
 public class getData {
     FirebaseAuth auth;
     FirebaseUser currentUser;
     DatabaseReference reference;
-    String uuid,hello,status,rekening;
+    String uuid, hello, status, rekening, var;
     int money;
 
     public getData(String uuid) {
         this.uuid = uuid;
-        auth = FirebaseAuth.getInstance();
-        currentUser = auth.getCurrentUser();
     }
 
-    public void callData(){
+    public void callData() {
         reference = FirebaseDatabase.getInstance().getReference().child("user").child(uuid);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -40,8 +40,7 @@ public class getData {
         });
     }
 
-    //kalau bisa pas mencet kasih suatu string buat nandain nama barang
-    public void callDataSeller(){
+    public void callDataSeller() {
         reference = FirebaseDatabase.getInstance().getReference().child("seller-data").child(uuid);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -54,5 +53,10 @@ public class getData {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    public void writeTemp(String var) {
+        reference = FirebaseDatabase.getInstance().getReference().child("temp");
+        reference.child("tmp").setValue(var);
     }
 }

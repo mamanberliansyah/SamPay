@@ -72,8 +72,5 @@ public class depSelect extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
-
 }
