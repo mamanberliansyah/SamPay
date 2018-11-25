@@ -39,7 +39,6 @@ public class progressSell extends Activity {
             mTextView.setText("NFC is disabled.");
             Toast.makeText(this, "NFC is disabled.", Toast.LENGTH_LONG).show();
         }
-
         handleIntent(getIntent());
     }
 
@@ -152,6 +151,7 @@ public class progressSell extends Activity {
         protected void onPostExecute(String result) {
             //retrieved id = result
             mTextView.setText("Read content: " + result);
+
             Intent intent = new Intent(progressSell.this, transaction.class);
             startActivity(intent);
         }

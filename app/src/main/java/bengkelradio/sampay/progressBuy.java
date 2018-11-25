@@ -8,7 +8,15 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -18,6 +26,9 @@ public class progressBuy extends Activity
         NfcAdapter.CreateNdefMessageCallback {
     private ArrayList<String> messagesToSendArray = new ArrayList<>();
     private NfcAdapter mNfcAdapter;
+    FirebaseAuth auth;
+    FirebaseUser currentUser;
+    DatabaseReference reference;
 
     //writes NFC tag to Seller
     public void addMessage() {
@@ -48,8 +59,11 @@ public class progressBuy extends Activity
                 records[i] = record;
             }
         }
+
+        //call ID from database
+        String id = currentUser.getUid();
         //write ID here
-        records[messagesToSendArray.size()] = NdefRecord.createApplicationRecord("xexo");
+        records[messagesToSendArray.size()] = NdefRecord.createApplicationRecord(id);
         return records;
     }
 
@@ -67,6 +81,9 @@ public class progressBuy extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress_buy);
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference().child("user").child(currentUser.getUid());
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (mNfcAdapter != null) {
             mNfcAdapter.setNdefPushMessageCallback(this, this);
