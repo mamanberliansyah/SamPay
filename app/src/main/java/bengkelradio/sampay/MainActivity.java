@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 nama.setText(hello);
                 uang.setText(money);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getApplicationContext(),databaseError.getMessage(),Toast.LENGTH_SHORT).show();
