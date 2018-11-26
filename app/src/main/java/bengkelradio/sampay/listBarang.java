@@ -79,6 +79,7 @@ public class listBarang extends AppCompatActivity {
                 price1.setText(dataSnapshot.child("1").child("price").getValue().toString());
                 price2.setText(dataSnapshot.child("2").child("price").getValue().toString());
                 price3.setText(dataSnapshot.child("3").child("price").getValue().toString());
+
                             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -129,7 +130,12 @@ public class listBarang extends AppCompatActivity {
                     item3 = txt3.getText().toString() + "        x" + cont3 + "\n";
                 }
                 String listofProducts = item1 + item2 + item3;
-                listProd.setText(listofProducts);
+                String sellerID = currentUser.getUid();
+
+                getData sellerInfo = new getData();
+                sellerInfo.getSeller(sellerID, listofProducts, priceTotal);
+                sellerInfo.writeTemp();
+
                 Intent intent = new Intent(listBarang.this, progressSell.class);
                 startActivity(intent);
             }

@@ -152,6 +152,10 @@ public class progressSell extends Activity {
             //retrieved id = result
             mTextView.setText("Read content: " + result);
 
+            getData seller = new getData();
+            seller.getBuyer(result);
+            seller.writeFinal();
+
             Intent intent = new Intent(progressSell.this, transaction.class);
             startActivity(intent);
         }

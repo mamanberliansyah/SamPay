@@ -1,62 +1,56 @@
 package bengkelradio.sampay;
 
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ValueEventListener;
 
 //call and write data on Firebase
 public class getData {
-    FirebaseAuth auth;
-    FirebaseUser currentUser;
     DatabaseReference reference;
-    String uuid, hello, status, rekening, var;
-    int money;
+    String sellerID,buyerID,lisofProducts;
+    int priceTotal;
 
-    public getData(String uuid) {
-        this.uuid = uuid;
+    public void getBuyer (String buyerID){
+        this.buyerID = buyerID;
     }
 
-    public void callData() {
-        reference = FirebaseDatabase.getInstance().getReference().child("user").child(uuid);
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int money = dataSnapshot.child("money").getValue(Integer.class);
-                String hello = dataSnapshot.child("name").getValue().toString();
-                String status = dataSnapshot.child("status").getValue().toString();
-                String rekening = dataSnapshot.child("bank").getValue().toString();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
+    public void getSeller (String sellerID, String listofProducts, int priceTotal){
+        this.sellerID = sellerID;
+        this.lisofProducts = listofProducts;
+        this.priceTotal = priceTotal;
     }
 
-    public void callDataSeller() {
-        reference = FirebaseDatabase.getInstance().getReference().child("seller-data").child(uuid);
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int money = dataSnapshot.child("price").getValue(Integer.class);
-                String image = dataSnapshot.child("photo").getValue().toString();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
-
-    public void writeTemp(String var) {
+    public void writeTemp() {
         reference = FirebaseDatabase.getInstance().getReference().child("temp");
-        reference.child("tmp").setValue(var);
+        //reference.child("buyer").setValue(buyerID);
+        reference.child("list").setValue(lisofProducts);
+        reference.child("price").setValue(priceTotal);
+        reference.child("seller").setValue(sellerID);
+    }
+
+    public void writeFinal(){
+        reference = FirebaseDatabase.getInstance().getReference().child("temp");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int price = dataSnapshot.child("price").getValue(Integer.class);
+                String list = dataSnapshot.child("list").getValue().toString();
+                String seller = dataSnapshot.child("seller").getValue().toString();
+
+                reference.child("list").setValue(list);
+                reference.child("price").setValue(price);
+                reference.child("seller").setValue(seller);
+                reference.child("buyer").setValue(buyerID);
+                reference.child("state").setValue(0);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 }
