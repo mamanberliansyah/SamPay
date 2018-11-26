@@ -156,7 +156,8 @@ public class progressSell extends Activity {
             seller.getBuyer(result);
             seller.writeFinal();
 
-            Intent intent = new Intent(progressSell.this, transaction.class);
+            Toast.makeText(getApplicationContext(),"Waiting for user confirm the purchase",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(progressSell.this, MainActivity.class);
             startActivity(intent);
         }
     }
