@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-
 public class depSelect extends AppCompatActivity {
     ImageButton confirm,cancel,dualima,limapuluh,seratus;
 
@@ -27,13 +26,13 @@ public class depSelect extends AppCompatActivity {
         setContentView(R.layout.activity_dep_select);
 
         depositText = (TextView) findViewById(R.id.depositAmt);
-        depositText.setText("Rp. 0");
+        depositText.setText("0");
 
 
         dualima = (ImageButton) findViewById(R.id.dualima);
         dualima.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                depositVal = depositVal + 25000;
+                depositVal = depositVal + 25;
                 depositText.setText("Rp. " + depositVal);
             }
         });
@@ -41,7 +40,7 @@ public class depSelect extends AppCompatActivity {
         limapuluh = (ImageButton) findViewById(R.id.limapuluh);
         limapuluh.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                depositVal = depositVal + 50000;
+                depositVal = depositVal + 50;
                 depositText.setText("Rp. " + depositVal);
             }
         });
@@ -49,7 +48,7 @@ public class depSelect extends AppCompatActivity {
         seratus = (ImageButton) findViewById(R.id.seratus);
         seratus.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                depositVal = depositVal + 100000;
+                depositVal = depositVal + 100;
                 depositText.setText("Rp. " + depositVal);
             }
         });

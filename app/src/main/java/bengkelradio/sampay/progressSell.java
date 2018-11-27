@@ -11,6 +11,7 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -155,10 +156,21 @@ public class progressSell extends Activity {
             getData seller = new getData();
             seller.getBuyer(result);
             seller.writeFinal();
+            sellerNotification();
 
-            Toast.makeText(getApplicationContext(),"Waiting for user confirm the purchase",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(progressSell.this, MainActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void sellerNotification() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+        alertDialogBuilder.setTitle("Notification");
+        alertDialogBuilder
+                .setMessage("Wait the buyer to confirm the transaction")
+                .setIcon(R.mipmap.ic_launcher);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }
