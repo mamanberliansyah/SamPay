@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser currentUser;
     DatabaseReference reference;
-    TextView nama,uang;
+    TextView nama,uang,status;
 
     @Override
     public void onBackPressed(){
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference().child("user").child(currentUser.getUid());
         nama = (TextView)findViewById(R.id.hai);
         uang = (TextView) findViewById(R.id.amount);
+        status = (TextView) findViewById(R.id.status);
 
         //post database value to TextView
         reference.addValueEventListener(new ValueEventListener() {
@@ -51,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String hello = dataSnapshot.child("name").getValue().toString();
                 String money = dataSnapshot.child("money").getValue().toString();
-                String status = dataSnapshot.child("status").getValue().toString();
-                String rekening = dataSnapshot.child("bank").getValue().toString();
+                String stat = dataSnapshot.child("status").getValue().toString();
                 nama.setText(hello);
                 uang.setText(money);
+                status.setText(stat);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -66,8 +67,14 @@ public class MainActivity extends AppCompatActivity {
         sell = (ImageButton) findViewById(R.id.sell);
         sell.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, listBarang.class);
-                startActivity(intent);
+                String stat = status.getText().toString();
+                if (stat.equals("seller")) {
+                    Intent intent = new Intent(MainActivity.this, listBarang.class);
+                    startActivity(intent);
+                }
+                else{
+                    notSeller();
+                }
             }
         });
 
@@ -117,6 +124,17 @@ public class MainActivity extends AppCompatActivity {
         alertDialogBuilder.setTitle("N/A");
         alertDialogBuilder
                 .setMessage("This feature is not available yet, please come back later :D")
+                .setIcon(R.mipmap.ic_launcher);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void notSeller() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+        alertDialogBuilder.setTitle("Notification");
+        alertDialogBuilder
+                .setMessage("Sorry, You don't have a seller acoount")
                 .setIcon(R.mipmap.ic_launcher);
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
