@@ -10,11 +10,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 //processing and updating money on Firebase
 public class updateMoney {
     FirebaseAuth auth;
     FirebaseUser currentUser;
-    DatabaseReference reference;
+    DatabaseReference reference,reference2;
     int addedMoney,money,cash;
     String mode,id;
 
@@ -34,15 +37,21 @@ public class updateMoney {
                 String hello = dataSnapshot.child("name").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
                 String rekening = dataSnapshot.child("bank").getValue().toString();
+                String riwayat = dataSnapshot.child("riwayat").getValue().toString();
                 String uid = currentUser.getUid();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                String timeStamp = sdf.format(new Date());
 
                 if (mode == "deposito"){
                     int total = addedMoney + money;
                     reference.child("money").setValue(total);
+                    reference.child("riwayat").setValue("Deposito (+)\nRp." + addedMoney + "\n" + timeStamp + "\n\n" + riwayat);
                 }
                 if ((mode == "withdraw")&&(money > addedMoney)){
                     int total = money - addedMoney;
                     reference.child("money").setValue(total);
+                    reference.child("riwayat").setValue("Withdraw (-)\nRp." + addedMoney + "\n" + timeStamp + "\n\n" + riwayat);
                 }
                 reference.child("name").setValue(hello);
                 reference.child("status").setValue(status);
@@ -64,22 +73,63 @@ public class updateMoney {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int money = dataSnapshot.child("money").getValue(Integer.class);
-                String hello = dataSnapshot.child("name").getValue().toString();
-                String status = dataSnapshot.child("status").getValue().toString();
-                String rekening = dataSnapshot.child("bank").getValue().toString();
+                final String hello = dataSnapshot.child("name").getValue().toString();
+                final String status = dataSnapshot.child("status").getValue().toString();
+                final String rekening = dataSnapshot.child("bank").getValue().toString();
+                final String riwayat = dataSnapshot.child("riwayat").getValue().toString();
 
                 if (mode == "deposito"){
-                    int total = cash + money;
+                    final int total = cash + money;
                     reference.child("money").setValue(total);
+
+                    reference2 = FirebaseDatabase.getInstance().getReference();
+                    reference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            String buyerID = dataSnapshot.child("temp").child("buyer").getValue().toString();
+                            String price = dataSnapshot.child("temp").child("price").getValue().toString();
+
+                            String buyerName = dataSnapshot.child("user").child(buyerID).child("name").getValue().toString();
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                            String timeStamp = sdf.format(new Date());
+
+                            reference.child("riwayat").setValue(buyerName + " (+)\nRp." + price + "\n" + timeStamp + "\n\n" + riwayat);
+                            reference.child("name").setValue(hello);
+                            reference.child("status").setValue(status);
+                            reference.child("bank").setValue(rekening);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+
                 }
                 if ((mode == "withdraw")&&(money > cash)){
-                    int total = money - cash;
+                    final int total = money - cash;
                     reference.child("money").setValue(total);
-                }
 
-                reference.child("name").setValue(hello);
-                reference.child("status").setValue(status);
-                reference.child("bank").setValue(rekening);
+                    reference2 = FirebaseDatabase.getInstance().getReference();
+                    reference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            String sellerID = dataSnapshot.child("temp").child("seller").getValue().toString();
+                            String price = dataSnapshot.child("temp").child("price").getValue().toString();
+                            String sellerName = dataSnapshot.child("seller-data").child(sellerID).child("storeName").getValue().toString();
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                            String timeStamp = sdf.format(new Date());
+
+                            reference.child("riwayat").setValue(sellerName + " (-)\nRp." + price + "\n" + timeStamp + "\n\n" + riwayat);
+                            reference.child("name").setValue(hello);
+                            reference.child("status").setValue(status);
+                            reference.child("bank").setValue(rekening);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
