@@ -4,18 +4,19 @@
 <img src="SamPayBanner.png" width="523" height="137">
 </p>
 
-Melakukan transaksi e-money jauh lebih praktis di Android dengan SamPay, terintegrasi dengan akun Google. Nikmati berbagai promo Grand Launching, selama masa berlaku.
+Melakukan transaksi e-money jauh lebih praktis di Android dengan SamPay, terintegrasi dengan akun Google. 
 
-Berikut merupakan layout aplikasi :
+Berikut merupakan hasil tampilan aplikasi :
 
 <p align="center">
-<img src="MockUps/Layout02.png" width="180" height="320">
-<img src="MockUps/Layout01.png" width="180" height="320">
-<img src="MockUps/Layout04.png" width="180" height="320">
-<img src="MockUps/Layout03.png" width="180" height="320">
-</p>
+<img src="MockUps/screen1.png" width="180" height="320">
+<img src="MockUps/screen2.png" width="180" height="320">
+<img src="MockUps/screen3.png" width="180" height="320">
+<img src="MockUps/screen3.png" width="180" height="320">
 
-Proyek ini dikembangkan menggunakan Android Studio dan 100% Open Source. Segala ketentuan lisensi diatur oleh GNU GPL. Aplikasi ini dikhususkan untuk riset Fintech. Dilarang menggunakan aplikasi ini untuk kepentingan komersial.
+<img src="MockUps/screen4.png" width="180" height="320"></p>
+
+Proyek ini dikembangkan menggunakan Android Studio dan 100% Open Source. Segala ketentuan lisensi diatur oleh GNU GPL. Aplikasi ini dikhususkan untuk riset Fintech dan O2O. Dilarang menggunakan aplikasi ini untuk kepentingan komersial.
 
 Repository Dedicated for Mobile Apps Course (ET4044)
 - M. Hilmi (18115006)
