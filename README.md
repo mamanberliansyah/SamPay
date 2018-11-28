@@ -9,12 +9,10 @@ Melakukan transaksi e-money jauh lebih praktis di Android dengan SamPay, terinte
 Berikut merupakan hasil tampilan aplikasi :
 
 <p align="center">
-<img src="MockUps/screen1.png" width="180" height="320">
-<img src="MockUps/screen2.png" width="180" height="320">
-<img src="MockUps/screen3.png" width="180" height="320">
-<img src="MockUps/screen3.png" width="180" height="320">
-
-<img src="MockUps/screen4.png" width="180" height="320"></p>
+<img src="MockUps/screen1.jpg" width="180" height="320">
+<img src="MockUps/screen2.jpg" width="180" height="320">
+<img src="MockUps/screen3.jpg" width="180" height="320">
+<img src="MockUps/screen3.jpg" width="180" height="320"></p>
 
 Proyek ini dikembangkan menggunakan Android Studio dan 100% Open Source. Segala ketentuan lisensi diatur oleh GNU GPL. Aplikasi ini dikhususkan untuk riset Fintech dan O2O. Dilarang menggunakan aplikasi ini untuk kepentingan komersial.
 
