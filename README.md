@@ -12,7 +12,7 @@ Berikut merupakan hasil tampilan aplikasi :
 <img src="MockUps/screen1.jpg" width="180" height="320">
 <img src="MockUps/screen2.jpg" width="180" height="320">
 <img src="MockUps/screen3.jpg" width="180" height="320">
-<img src="MockUps/screen3.jpg" width="180" height="320"></p>
+<img src="MockUps/screen4.jpg" width="180" height="320"></p>
 
 Proyek ini dikembangkan menggunakan Android Studio dan 100% Open Source. Segala ketentuan lisensi diatur oleh GNU GPL. Aplikasi ini dikhususkan untuk riset Fintech dan O2O. Dilarang menggunakan aplikasi ini untuk kepentingan komersial.
 
@@ -23,9 +23,12 @@ Repository Dedicated for Mobile Apps Course (ET4044)
 ### Logbook :
 
 ```
+24/11/2018
+Added Firebase for Auth, User DB, temporary
+
 11/11/2018
-* Menambahkan activity withdraw & list
-* NFC
+-Menambahkan activity withdraw & list
+-NFC
 
 21/10/2018
 Menambahkan activity deposit
